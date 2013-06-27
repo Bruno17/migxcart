@@ -5,18 +5,17 @@
     
      <object class="mcProductCategory" table="migxcart_products_categories" extends="xPDOSimpleObject">
     	<!-- This table holds the links between categories and products -->
-    	<field key="categoryid" dbtype="int" phptype="integer" precision="10" null="false" default="" index="index" />
-    	<field key="productid" dbtype="int" phptype="integer" precision="10" null="false" default="" index="index" />
+    	<field key="category_id" dbtype="int" phptype="integer" precision="10" null="false" default="" index="index" />
+    	<field key="product_id" dbtype="int" phptype="integer" precision="10" null="false" default="" index="index" />
     	<field key="sort" dbtype="int" phptype="integer" precision="8" null="false" default="" />
     	
-    	<aggregate alias="Product" class="vcProduct" local="productid" foreign="id" cardinality="one" owner="foreign" />
-    	<aggregate alias="Category" class="modResource" local="categoryid" foreign="id" cardinality="one" owner="foreign" />
+    	<aggregate alias="Product" class="mcProduct" local="product_id" foreign="id" cardinality="one" owner="foreign" />
+    	<aggregate alias="Category" class="modResource" local="category_id" foreign="id" cardinality="one" owner="foreign" />
     </object>    
     
     <object class="mcProduct" table="migxcart_products" extends="xPDOSimpleObject">
     	<!-- This table holds all the products and its settings -->
     	<field key="parent" dbtype="int" phptype="integer" precision="8" null="false" default="" />
-    	<field key="taxcategory" dbtype="int" phptype="integer" precision="8" null="false" default="" />
 		<field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
 		<field key="alias" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="index" />
 		<field key="description" dbtype="text" phptype="string" null="false" default="" />
@@ -26,8 +25,6 @@
 		<field key="shippingprice" dbtype="decimal" precision="8,2" phptype="float" null="false" default="" />
 		<field key="extended" dbtype="text" phptype="json" null="false" default="" />
 		<field key="stock" dbtype="int" phptype="integer" precision="8" null="false" default="" />
- 		<field key="images" dbtype="text" phptype="string" null="false" default="" />
-        
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true"/>
         <field key="createdby" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="editedon" dbtype="datetime" phptype="datetime" null="true"/>
@@ -35,7 +32,21 @@
 	    <field key="deleted" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="published" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />          
 
-		<composite alias="ProductCategory" class="mcProductCategory" local="id" foreign="productid" cardinality="many" owner="local" /> 
+		<composite alias="ProductCategory" class="mcProductCategory" local="id" foreign="product_id" cardinality="many" owner="local" /> 
+        <composite alias="Images" class="mcProductImage" local="id" foreign="product_id" cardinality="many" owner="local" />
     </object>
+    <object class="mcProductImage" table="migxcart_product_images" extends="xPDOSimpleObject">
+ 
+        <field key="title" dbtype="varchar" precision="255" phptype="string" null="true" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
+        <field key="product_id" dbtype="int" precision="11" phptype="integer" null="true" />
+        <field key="filename" dbtype="varchar" precision="20" phptype="string" null="true" />
+        <field key="pos" dbtype="int" phptype="integer" precision="8" null="false" default="" />
+        <field key="deleted" dbtype="int" precision="11" phptype="integer" null="false" default="0" />
+        <field key="published" dbtype="int" precision="11" phptype="integer" null="false" default="1" />
+         
+        <aggregate alias="Product" class="mcProduct" local="product_id" foreign="id" cardinality="one" owner="foreign" />    
+         
+    </object>    
 
 </model>

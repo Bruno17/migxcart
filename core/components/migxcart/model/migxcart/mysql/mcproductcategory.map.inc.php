@@ -6,13 +6,13 @@ $xpdo_meta_map['mcProductCategory']= array (
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
-    'categoryid' => 0,
-    'productid' => 0,
+    'category_id' => 0,
+    'product_id' => 0,
     'sort' => 0,
   ),
   'fieldMeta' => 
   array (
-    'categoryid' => 
+    'category_id' => 
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
@@ -21,7 +21,7 @@ $xpdo_meta_map['mcProductCategory']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'productid' => 
+    'product_id' => 
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
@@ -43,8 +43,8 @@ $xpdo_meta_map['mcProductCategory']= array (
   array (
     'Product' => 
     array (
-      'class' => 'vcProduct',
-      'local' => 'productid',
+      'class' => 'mcProduct',
+      'local' => 'product_id',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
@@ -52,7 +52,7 @@ $xpdo_meta_map['mcProductCategory']= array (
     'Category' => 
     array (
       'class' => 'modResource',
-      'local' => 'categoryid',
+      'local' => 'category_id',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

@@ -7,7 +7,6 @@ $xpdo_meta_map['mcProduct']= array (
   'fields' => 
   array (
     'parent' => 0,
-    'taxcategory' => 0,
     'name' => '',
     'alias' => '',
     'description' => '',
@@ -17,7 +16,6 @@ $xpdo_meta_map['mcProduct']= array (
     'shippingprice' => 0,
     'extended' => '',
     'stock' => 0,
-    'images' => '',
     'createdon' => NULL,
     'createdby' => 0,
     'editedon' => NULL,
@@ -28,14 +26,6 @@ $xpdo_meta_map['mcProduct']= array (
   'fieldMeta' => 
   array (
     'parent' => 
-    array (
-      'dbtype' => 'int',
-      'phptype' => 'integer',
-      'precision' => '8',
-      'null' => false,
-      'default' => 0,
-    ),
-    'taxcategory' => 
     array (
       'dbtype' => 'int',
       'phptype' => 'integer',
@@ -116,13 +106,6 @@ $xpdo_meta_map['mcProduct']= array (
       'null' => false,
       'default' => 0,
     ),
-    'images' => 
-    array (
-      'dbtype' => 'text',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => '',
-    ),
     'createdon' => 
     array (
       'dbtype' => 'datetime',
@@ -178,7 +161,15 @@ $xpdo_meta_map['mcProduct']= array (
     array (
       'class' => 'mcProductCategory',
       'local' => 'id',
-      'foreign' => 'productid',
+      'foreign' => 'product_id',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Images' => 
+    array (
+      'class' => 'mcProductImage',
+      'local' => 'id',
+      'foreign' => 'product_id',
       'cardinality' => 'many',
       'owner' => 'local',
     ),

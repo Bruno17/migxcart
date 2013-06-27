@@ -5,5 +5,6 @@ $xpdo_meta_map = array (
   array (
     0 => 'mcProductCategory',
     1 => 'mcProduct',
+    2 => 'mcProductImage',
   ),
 );
